@@ -1,8 +1,7 @@
 package hashcode.Models;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Endpoint
 {
@@ -36,7 +35,22 @@ public class Endpoint
 
     public ArrayList<Integer> getSortedCacheServers()
     {
-        map.entrySet();
-        return sortedCacheServers;
+        //map to arrayList<ServerId, time>
+        ArrayList<Map.Entry<Integer, Integer>> arrayList = new ArrayList<>();
+        Set<Map.Entry<Integer, Integer>> entrySet = map.entrySet();
+        arrayList.addAll(entrySet);
+
+        arrayList.sort((o1, o2) ->
+        {
+            if (o1.getValue() > o2.getValue())
+                return 1;
+            if (o1.getValue().equals(o2.getValue()))
+                return 0;
+            return -1;
+        });
+
+
+
+        return arrayList;
     }
 }
