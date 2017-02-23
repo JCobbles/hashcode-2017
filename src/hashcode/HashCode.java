@@ -51,8 +51,10 @@ public class HashCode {
             int latency = Integer.parseInt(endpointDescription[0]);
             int cachesAttached = Integer.parseInt(endpointDescription[1]);
             Endpoint endpoint = new Endpoint(latency);
-            for (int j = 0; j < endpointDescription.length; j++) {
+
+            for (int j = 0; j < cachesAttached; j++) {
                 String[] thisEndpointDescription = inputFile.nextLine().split(" ");
+
                 endpoint.addCacheServer(
                         Integer.parseInt(thisEndpointDescription[0]), 
                         Integer.parseInt(thisEndpointDescription[1]));
