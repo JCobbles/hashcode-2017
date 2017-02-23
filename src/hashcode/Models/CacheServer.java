@@ -13,19 +13,21 @@ import static hashcode.Model.cacheServerSize;
 /**
  * @author jacob
  */
-public class CacheServer
-{
+public class CacheServer {
+
     private List<Integer> videoIds = new ArrayList<>();
     private int freeSpace;
 
-    public CacheServer()
-    {
+    public CacheServer() {
         freeSpace = cacheServerSize;
     }
 
-
-    public void addVideoId(int id)
-    {
+    public void addVideoById(int id, int spaceUsed) {
         videoIds.add(id);
+        freeSpace -= spaceUsed;
+    }
+
+    public int getFreeSpace() {
+        return freeSpace;
     }
 }
