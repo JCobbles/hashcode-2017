@@ -78,6 +78,7 @@ public class HashCode {
         System.out.println(Arrays.toString(videos));
         System.out.println("endpoints.length: " + endpoints.length);
         System.out.println(Arrays.toString(endpoints));
+        System.out.println(Arrays.toString(requests));
 
     }
 
