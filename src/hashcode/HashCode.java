@@ -5,6 +5,7 @@
  */
 package hashcode;
 
+import hashcode.Models.Endpoint;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -37,7 +38,7 @@ public class HashCode {
         numberOfCacheServers = Integer.parseInt(description[3]);
         cacheServerSize = Integer.parseInt(description[4]);
         int[] videos = new int[numberOfVideos];
-        
+        Endpoint[] endpoints = new Endpoint[numberOfEndpoints];
         // videos line
         String[] videosDescription = inputFile.next().split(" ");
         
@@ -49,8 +50,13 @@ public class HashCode {
             String[] endpointDescription = inputFile.next().split(" ");
             int latency = Integer.parseInt(endpointDescription[0]);
             int cachesAttached = Integer.parseInt(endpointDescription[1]);
+            Endpoint endpoint = new Endpoint(latency);
             for (int j = 0; j < endpointDescription.length; j++) {
-                String[] cacheDescription = inputFile
+                String[] thisEndpointDescription = inputFile.next().split(" ");
+                endpoint.addCacheServer(
+                        Integer.parseInt(thisEndpointDescription[0]), 
+                        Integer.parseInt(thisEndpointDescription[1]));
+                
             }
         }
         
