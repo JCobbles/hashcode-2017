@@ -50,7 +50,7 @@ public class HashCode {
             String[] endpointDescription = inputFile.nextLine().split(" ");
             int latency = Integer.parseInt(endpointDescription[0]);
             int cachesAttached = Integer.parseInt(endpointDescription[1]);
-            Endpoint endpoint = new Endpoint(latency);
+            Endpoint endpoint = new Endpoint(i, latency);
 
             for (int j = 0; j < cachesAttached; j++) {
                 String[] thisEndpointDescription = inputFile.nextLine().split(" ");
