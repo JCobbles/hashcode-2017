@@ -20,9 +20,9 @@ import java.util.stream.Stream;
  */
 public class HashCode {
 
-    /**
-     * @param args the command line arguments
-     */
+    private static Model model;
+
+
     public static void main(String[] args) throws FileNotFoundException {
         Scanner keyboard = new Scanner(System.in);
         int numberOfVideos, numberOfEndpoints, numberOfRequestDescriptions, numberOfCacheServers, cacheServerSize;
@@ -77,6 +77,8 @@ public class HashCode {
             requests[i] = new RequestDescription(numOfRequests, videoId, endpointId);
         }
 
+        model = new Model(numberOfCacheServers, cacheServerSize, videos, endpoints, requests);
+        model.display();
     }
 
     private static int[] getIntegerArray(String line) {
