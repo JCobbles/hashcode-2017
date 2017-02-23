@@ -8,9 +8,11 @@ public class Endpoint
     //cacheServerIndex, latencyToDataCenter
     private Map<Integer, Integer> map;
     private int latencyToDataCenter;
+    private int endpointId;
 
-    public Endpoint(int latencyToDataCenter)
+    public Endpoint(int id, int latencyToDataCenter)
     {
+        endpointId = id;
         map = new HashMap<>();
         this.latencyToDataCenter = latencyToDataCenter;
     }
