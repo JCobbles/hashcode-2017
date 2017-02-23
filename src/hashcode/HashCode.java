@@ -8,6 +8,8 @@ package hashcode;
 import hashcode.Models.Endpoint;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -43,7 +45,7 @@ public class HashCode {
         String[] videosDescription = inputFile.nextLine().split(" ");
         
         for (int i = 0; i < numberOfVideos; i++) {
-            videos[0] = Integer.parseInt(videosDescription[i]);
+            videos[i] = Integer.parseInt(videosDescription[i]);
         }
         
         for (int i = 0; i < numberOfEndpoints; i++) {
@@ -61,7 +63,12 @@ public class HashCode {
                 
             }
         }
-        
+
+        System.out.println("videos.length: " + videos.length);
+        System.out.println(Arrays.toString(videos));
+        System.out.println("endpoints.length: " + endpoints.length);
+        System.out.println(Arrays.toString(endpoints));
+
     }
 
 }
