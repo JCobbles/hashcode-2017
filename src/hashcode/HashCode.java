@@ -10,7 +10,9 @@ import hashcode.Models.RequestDescription;
 import hashcode.Models.Video;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -41,7 +43,7 @@ public class HashCode {
         numberOfCacheServers = description[3];
         cacheServerSize = description[4];
         Video[] videos = new Video[numberOfVideos];
-        Endpoint[] endpoints = new Endpoint[numberOfEndpoints];
+        List<Endpoint> endpoints = new ArrayList<>(numberOfEndpoints/2);
         RequestDescription[] requests = new RequestDescription[numberOfRequestDescriptions];
 
         // videos line
@@ -57,15 +59,17 @@ public class HashCode {
             int latency = endpointDescription[0];
             int cachesAttached = endpointDescription[1];
             Endpoint endpoint = new Endpoint(i, latency);
+            if (cachesAttached > 0) {
+                for (int j = 0; j < cachesAttached; j++) {
+                    String[] thisEndpointDescription = inputFile.nextLine().split(" ");
 
-            for (int j = 0; j < cachesAttached; j++) {
-                String[] thisEndpointDescription = inputFile.nextLine().split(" ");
-
-                endpoint.addCacheServer(
-                        Integer.parseInt(thisEndpointDescription[0]),
-                        Integer.parseInt(thisEndpointDescription[1]));
+                    endpoint.addCacheServer(
+                            Integer.parseInt(thisEndpointDescription[0]),
+                            Integer.parseInt(thisEndpointDescription[1]));
+                }
+                endpoints.add(endpoint);
             }
-            endpoints[i] = endpoint;
+            
         }
 
         // request descriptions
