@@ -18,4 +18,10 @@ public class RequestDescription {
         this.videoId = videoId;
         this.endpointId = endpointId;
     }
+
+    @Override
+    public String toString()
+    {
+        return "numberOfRequests: " + numberOfRequests + " videoId:" + videoId + " endpointId:" + endpointId;
+    }
 }

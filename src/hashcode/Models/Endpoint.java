@@ -25,6 +25,6 @@ public class Endpoint
     @Override
     public String toString()
     {
-        return "id: " + endpointId + " latencyToDataCenter: " + latencyToDataCenter + "latencyToDataCacheServers: " + map;
+        return "id: " + endpointId + " latencyToDataCenter: " + latencyToDataCenter + " latencyToDataCacheServers: " + map;
     }
 }

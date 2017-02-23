@@ -10,7 +10,6 @@ import hashcode.Models.RequestDescription;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -76,10 +75,13 @@ public class HashCode {
             requests[i] = new RequestDescription(numOfRequests, videoId, endpointId);
         }
 
+        System.out.println("numberOfCacheServers: " + numberOfCacheServers);
+        System.out.println("cacheServerSize: " + cacheServerSize + "MB");
         System.out.println("videos.length: " + videos.length);
         System.out.println(Arrays.toString(videos));
         System.out.println("endpoints.length: " + endpoints.length);
         System.out.println(Arrays.toString(endpoints));
+        System.out.println("requests.length: " + requests.length);
         System.out.println(Arrays.toString(requests));
 
     }
