@@ -14,10 +14,12 @@ import java.util.stream.Stream;
 public class Model
 {
     private int numberOfCacheServers;
-    private int cacheServerSize;
+    public static int cacheServerSize;
     private Video[] videos;
     private Endpoint[] endpoints;
     private RequestDescription[] requests;
+
+    private CacheServer[] cacheServers;
 
     public Model(int numberOfCacheServers, int cacheServerSize, Video[] videos, Endpoint[] endpoints, RequestDescription[] requests)
     {
@@ -26,6 +28,12 @@ public class Model
         this.videos = videos;
         this.endpoints = endpoints;
         this.requests = requests;
+
+        cacheServers = new CacheServer[numberOfCacheServers];
+        for (int i = 0; i < numberOfCacheServers; i++)
+        {
+            cacheServers[i] = new CacheServer();
+        }
     }
 
     public void display()
@@ -66,10 +74,10 @@ public class Model
     {
         for (Endpoint endpoint : endpoints) {
             //cache service indices
-            //ArrayList<Integer> sortedCacheServers = endpoint.getSortedCacheServers();
+            ArrayList<Integer> sortedCacheServers = endpoint.getSortedCacheServers();
         }
         
-        CacheServer[] cacheServers;
+       /* CacheServer[] cacheServers;
 
         for(RequestDescription request : requests) {
             Endpoint associatedEndpoint = endpoints[request.getEndpointId()];
@@ -82,6 +90,6 @@ public class Model
                 }
                 
             }
-        }
+        }*/
     }
 }

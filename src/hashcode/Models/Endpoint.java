@@ -3,44 +3,50 @@ package hashcode.Models;
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class Endpoint {
+public class Endpoint
+{
 
     //<cacheServerIndex, latencyToCacheServer>
     private Map<Integer, Integer> map;
     private int latencyToDataCenter;
     private int endpointId;
 
-    public Endpoint(int id, int latencyToDataCenter) {
+    public Endpoint(int id, int latencyToDataCenter)
+    {
         endpointId = id;
         map = new HashMap<>();
         this.latencyToDataCenter = latencyToDataCenter;
     }
-    
-    public boolean hasAnyCacheServers() {
+
+    public boolean hasAnyCacheServers()
+    {
         return map.size() > 0;
     }
 
-    public void addCacheServer(int id, int latency) {
+    public void addCacheServer(int id, int latency)
+    {
         map.put(id, latency);
     }
 
-    public int getLatencyToDataCenter() {
+    public int getLatencyToDataCenter()
+    {
         return latencyToDataCenter;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "id: " + endpointId + " latencyToDataCenter: " + latencyToDataCenter + " latencyToDataCacheServers: " + map;
     }
 
     public ArrayList<Integer> getSortedCacheServers()
     {
         //map to arrayList<ServerId, time>
-        ArrayList<Map.Entry<Integer, Integer>> arrayList = new ArrayList<>();
+        ArrayList<Map.Entry<Integer, Integer>> arrayListOfEntries = new ArrayList<>();
         Set<Map.Entry<Integer, Integer>> entrySet = map.entrySet();
-        arrayList.addAll(entrySet);
+        arrayListOfEntries.addAll(entrySet);
 
-        arrayList.sort((o1, o2) ->
+        arrayListOfEntries.sort((o1, o2) ->
         {
             if (o1.getValue() > o2.getValue())
                 return 1;
@@ -49,8 +55,10 @@ public class Endpoint {
             return -1;
         });
 
+        ArrayList<Integer> sortedServers = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : arrayListOfEntries)
+            sortedServers.add(entry.getKey());
 
-
-        return arrayList;
+        return sortedServers;
     }
 }
