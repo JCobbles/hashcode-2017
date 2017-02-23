@@ -52,9 +52,9 @@ public class HashCode {
         }
 
         for (int i = 0; i < numberOfEndpoints; i++) {
-            String[] endpointDescription = inputFile.nextLine().split(" ");
-            int latency = Integer.parseInt(endpointDescription[0]);
-            int cachesAttached = Integer.parseInt(endpointDescription[1]);
+            int[] endpointDescription = getIntegerArray(inputFile.nextLine());
+            int latency = endpointDescription[0];
+            int cachesAttached = endpointDescription[1];
             Endpoint endpoint = new Endpoint(i, latency);
 
             for (int j = 0; j < cachesAttached; j++) {
