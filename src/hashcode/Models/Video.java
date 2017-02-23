@@ -2,7 +2,12 @@ package hashcode.Models;
 
 public class Video
 {
-    int size;
+    public int getSize()
+    {
+        return size;
+    }
+
+    private int size;
 
     public Video(int size)
     {

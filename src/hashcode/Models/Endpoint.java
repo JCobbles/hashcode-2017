@@ -7,6 +7,12 @@ public class Endpoint
 {
     //cacheServerIndex, latencyToDataCenter
     private Map<Integer, Integer> map;
+
+    public int getLatencyToDataCenter()
+    {
+        return latencyToDataCenter;
+    }
+
     private int latencyToDataCenter;
     private int endpointId;
 

@@ -6,6 +6,7 @@ import hashcode.Models.RequestDescription;
 import hashcode.Models.Video;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Model
 {
@@ -32,7 +33,34 @@ public class Model
         System.out.println(Arrays.toString(videos));
         System.out.println("endpoints.length: " + endpoints.length);
         System.out.println(Arrays.toString(endpoints));
+        displayRequests();
+    }
+
+    public void displayRequests()
+    {
         System.out.println("requests.length: " + requests.length);
         System.out.println(Arrays.toString(requests));
+    }
+
+    public void sortRequests()
+    {
+        Arrays.sort(requests, (o1, o2) ->
+        {
+            float weight1 = (float)(endpoints[o1.getEndpointId()].getLatencyToDataCenter() * o1.getNumberOfRequests()) / videos[o1.getVideoId()].getSize();
+            float weight2 = (float)(endpoints[o2.getEndpointId()].getLatencyToDataCenter() * o2.getNumberOfRequests()) / videos[o2.getVideoId()].getSize();
+
+            if(weight1 == weight2)
+                return 0;
+
+            if(weight1 > weight2)
+                return -1;
+
+            return 1;
+        });
+    }
+
+    public void cacheVideos()
+    {
+
     }
 }

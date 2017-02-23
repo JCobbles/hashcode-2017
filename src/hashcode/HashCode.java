@@ -10,7 +10,6 @@ import hashcode.Models.RequestDescription;
 import hashcode.Models.Video;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -79,6 +78,11 @@ public class HashCode {
 
         model = new Model(numberOfCacheServers, cacheServerSize, videos, endpoints, requests);
         model.display();
+
+        model.sortRequests();
+        model.displayRequests();
+
+        model.cacheVideos();
     }
 
     private static int[] getIntegerArray(String line) {
