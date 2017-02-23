@@ -39,11 +39,13 @@ public class HashCode {
         cacheServerSize = Integer.parseInt(description[4]);
         int[] videos = new int[numberOfVideos];
         Endpoint[] endpoints = new Endpoint[numberOfEndpoints];
+        RequestDescription[] requests = new RequestDescription[numberOfRequestDescriptions];
+        
         // videos line
         String[] videosDescription = inputFile.nextLine().split(" ");
         
         for (int i = 0; i < numberOfVideos; i++) {
-            videos[0] = Integer.parseInt(videosDescription[i]);
+            videos[i] = Integer.parseInt(videosDescription[i]);
         }
         
         for (int i = 0; i < numberOfEndpoints; i++) {
@@ -58,10 +60,21 @@ public class HashCode {
                 endpoint.addCacheServer(
                         Integer.parseInt(thisEndpointDescription[0]), 
                         Integer.parseInt(thisEndpointDescription[1]));
-                
             }
+            endpoints[i] = endpoint;
+        }
+        
+        for (int i = 0; i < numberOfRequestDescriptions; i++) {
+            String[] requestDescription = inputFile.nextLine().split(" ");
+            int videoId = Integer.parseInt(requestDescription[0]);
+            int endpointId = Integer.parseInt(requestDescription[1]);
+            int numOfRequests = Integer.parseInt(requestDescription[2]);
+            requests[i] = new RequestDescription(numOfRequests, videoId, endpointId);
         }
         
     }
 
+    private static void getIntegerArray(String line) {
+        
+    }
 }
