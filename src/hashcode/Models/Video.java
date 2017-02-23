@@ -8,4 +8,10 @@ public class Video
     {
         this.size = size;
     }
+
+    @Override
+    public String toString()
+    {
+        return "size: " + size + "MB";
+    }
 }

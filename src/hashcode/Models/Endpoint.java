@@ -21,4 +21,10 @@ public class Endpoint
     {
         map.put(id, latency);
     }
+
+    @Override
+    public String toString()
+    {
+        return "id: " + endpointId + " latencyToDataCenter: " + latencyToDataCenter + "latencyToDataCacheServers: " + map;
+    }
 }

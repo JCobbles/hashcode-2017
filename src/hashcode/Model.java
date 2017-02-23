@@ -10,5 +10,10 @@ public class Model
     private CacheServer[] cacheServers;
     private Endpoint[] endpoints;
 
-
+    public Model(Video[] videosAtDataCenter, CacheServer[] cacheServers, Endpoint[] endpoints)
+    {
+        this.videosAtDataCenter = videosAtDataCenter;
+        this.cacheServers = cacheServers;
+        this.endpoints = endpoints;
+    }
 }
