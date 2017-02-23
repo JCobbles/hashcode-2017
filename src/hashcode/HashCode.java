@@ -45,10 +45,10 @@ public class HashCode {
         RequestDescription[] requests = new RequestDescription[numberOfRequestDescriptions];
 
         // videos line
-        String[] videosDescription = inputFile.nextLine().split(" ");
+        int[] videosDescription = getIntegerArray(inputFile.nextLine());
 
         for (int i = 0; i < numberOfVideos; i++) {
-            videos[i] = new Video(Integer.parseInt(videosDescription[i]));
+            videos[i] = new Video(videosDescription[i]);
         }
 
         // endpoints
