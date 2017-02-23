@@ -83,7 +83,9 @@ public class HashCode {
         model.displayRequests();
 
         model.cacheVideos();
+        model.displayCache();
     }
+
 
     private static int[] getIntegerArray(String line) {
         int[] v = Stream.of(line.split(" ")).mapToInt(Integer::parseInt).toArray();

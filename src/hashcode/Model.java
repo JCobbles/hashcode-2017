@@ -30,7 +30,7 @@ public class Model {
 
         cacheServers = new CacheServer[numberOfCacheServers];
         for (int i = 0; i < numberOfCacheServers; i++) {
-            cacheServers[i] = new CacheServer();
+            cacheServers[i] = new CacheServer(i);
         }
     }
 
@@ -68,6 +68,8 @@ public class Model {
     }
 
     public void cacheVideos() {
+
+        mark:
         for (RequestDescription request : requests) {
             Endpoint associatedEndpoint = endpoints[request.getEndpointId()];
             Video associatedVideo = videos[request.getVideoId()];
@@ -83,7 +85,16 @@ public class Model {
                     continue;
                 }
                 server.addVideoById(request.getVideoId(), associatedVideo.getSize());
+                continue mark;
             }
+        }
+    }
+
+    public void displayCache()
+    {
+        for(CacheServer cacheServer: cacheServers)
+        {
+            System.out.println(cacheServer);
         }
     }
 }
