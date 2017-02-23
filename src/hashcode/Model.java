@@ -70,6 +70,8 @@ public class Model {
     }
 
     public void cacheVideos() {
+
+        mark:
         for (RequestDescription request : requests) {
             Endpoint associatedEndpoint = endpoints[request.getEndpointId()];
             Video associatedVideo = videos[request.getVideoId()];
@@ -85,6 +87,7 @@ public class Model {
                     continue;
                 }
                 server.addVideoById(request.getVideoId(), associatedVideo.getSize());
+                continue mark;
             }
         }
     }
@@ -105,6 +108,13 @@ public class Model {
         } catch (IOException e) {
             // do something
         }
-        
+    }
+
+    public void displayCache()
+    {
+        for(CacheServer cacheServer: cacheServers)
+        {
+            System.out.println(cacheServer);
+        }
     }
 }
