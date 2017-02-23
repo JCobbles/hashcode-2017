@@ -5,6 +5,7 @@ import hashcode.Models.Endpoint;
 import hashcode.Models.RequestDescription;
 import hashcode.Models.Video;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -61,6 +62,15 @@ public class Model
 
     public void cacheVideos()
     {
+        for (int i = 0; i < endpoints.length; i++)
+        {
+            //cache service indices
+            ArrayList<Integer> sortedCacheServers = endpoints[i].getSortedCacheServers();
+        }
 
+        for(;;)
+        {
+
+        }
     }
 }
