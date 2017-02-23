@@ -69,18 +69,19 @@ public class Model
             //ArrayList<Integer> sortedCacheServers = endpoint.getSortedCacheServers();
         }
         
-        CacheServer[] cacheServers;
-
         for(RequestDescription request : requests) {
             Endpoint associatedEndpoint = endpoints[request.getEndpointId()];
             Video associatedVideo = videos[request.getVideoId()];
-            if (associatedEndpoint.hasAnyCacheServers()) {
-                List<Integer> cacheServerIds = associatedEndpoint.getSortedCacheServers();
-                for (int i : cacheServerIds) {
-                    CacheServer server = cacheServers[i];
-                    server.si
-                }
-                
+            if (!associatedEndpoint.hasAnyCacheServers()) {
+                continue;
+            }
+            if (associatedVideo.getSize() > cacheServerSize) {
+                continue;
+            }
+            List<Integer> cacheServerIds = associatedEndpoint.getSortedCacheServers();
+            for (int i : cacheServerIds) {
+                CacheServer server = cacheServers[i];
+                server.addVideoId(request.getVideoId());
             }
         }
     }
