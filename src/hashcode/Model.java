@@ -4,6 +4,8 @@ import hashcode.Models.CacheServer;
 import hashcode.Models.Endpoint;
 import hashcode.Models.RequestDescription;
 import hashcode.Models.Video;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +32,7 @@ public class Model {
 
         cacheServers = new CacheServer[numberOfCacheServers];
         for (int i = 0; i < numberOfCacheServers; i++) {
-            cacheServers[i] = new CacheServer();
+            cacheServers[i] = new CacheServer(i);
         }
     }
 
@@ -85,5 +87,24 @@ public class Model {
                 server.addVideoById(request.getVideoId(), associatedVideo.getSize());
             }
         }
+    }
+
+    public void writeOutput() {
+        try {
+            PrintWriter writer = new PrintWriter("output.out", "UTF-8");
+            long numberOfCachesUsed = Stream.of(cacheServers).filter((c) -> c.getFreeSpace() != cacheServerSize).count();
+            writer.println(numberOfCachesUsed);
+            for (CacheServer server : cacheServers) {
+                writer.print(server.getId() + " ");
+                for (int i : server.getVideos()) {
+                    writer.print(i + " ");
+                }
+                writer.println();
+            }
+            writer.close();
+        } catch (IOException e) {
+            // do something
+        }
+        
     }
 }

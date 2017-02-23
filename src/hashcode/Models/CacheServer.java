@@ -17,9 +17,15 @@ public class CacheServer {
 
     private List<Integer> videoIds = new ArrayList<>();
     private int freeSpace;
+    private int id;
 
-    public CacheServer() {
+    public CacheServer(int id) {
         freeSpace = cacheServerSize;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void addVideoById(int id, int spaceUsed) {
@@ -29,5 +35,9 @@ public class CacheServer {
 
     public int getFreeSpace() {
         return freeSpace;
+    }
+
+    public List<Integer> getVideos() {
+        return videoIds;
     }
 }

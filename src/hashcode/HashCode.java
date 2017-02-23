@@ -27,7 +27,7 @@ public class HashCode {
         int numberOfVideos, numberOfEndpoints, numberOfRequestDescriptions, numberOfCacheServers, cacheServerSize;
 
         //System.out.print("Enter the filename: ");
-        String filename = "in.txt";//keyboard.nextLine();
+        String filename = "tr.in";//keyboard.nextLine();
 
         File file = new File(filename);
         Scanner inputFile = new Scanner(file);
@@ -77,12 +77,15 @@ public class HashCode {
         }
 
         model = new Model(numberOfCacheServers, cacheServerSize, videos, endpoints, requests);
-        model.display();
+//        model.display();
 
         model.sortRequests();
-        model.displayRequests();
+//        model.displayRequests();
 
         model.cacheVideos();
+        
+        model.writeOutput();
+        System.out.println("done");
     }
 
     private static int[] getIntegerArray(String line) {
