@@ -8,6 +8,7 @@ import hashcode.Models.Video;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.Stream;
 
 public class Model
 {
