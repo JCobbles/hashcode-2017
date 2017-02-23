@@ -2,3 +2,6 @@ nbproject
 test
 build.xml
 manifest.mf
+out
+.idea
+*.iml
