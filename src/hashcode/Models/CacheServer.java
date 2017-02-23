@@ -10,6 +10,10 @@ package hashcode.Models;
  * @author jacob
  */
 public class CacheServer {
-    int size;
+    private int size;
 
+    public CacheServer(int size)
+    {
+        this.size = size;
+    }
 }
