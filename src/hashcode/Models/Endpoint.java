@@ -16,6 +16,10 @@ public class Endpoint {
         map = new HashMap<>();
         this.latencyToDataCenter = latencyToDataCenter;
     }
+    
+    public boolean hasAnyCacheServers() {
+        return map.size() > 0;
+    }
 
     public void addCacheServer(int id, int latency) {
         map.put(id, latency);

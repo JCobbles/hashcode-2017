@@ -8,6 +8,7 @@ import hashcode.Models.Video;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class Model
@@ -63,15 +64,24 @@ public class Model
 
     public void cacheVideos()
     {
-        for (int i = 0; i < endpoints.length; i++)
-        {
+        for (Endpoint endpoint : endpoints) {
             //cache service indices
-            ArrayList<Integer> sortedCacheServers = endpoints[i].getSortedCacheServers();
+            //ArrayList<Integer> sortedCacheServers = endpoint.getSortedCacheServers();
         }
+        
+        CacheServer[] cacheServers;
 
-        for(;;)
-        {
-
+        for(RequestDescription request : requests) {
+            Endpoint associatedEndpoint = endpoints[request.getEndpointId()];
+            Video associatedVideo = videos[request.getVideoId()];
+            if (associatedEndpoint.hasAnyCacheServers()) {
+                List<Integer> cacheServerIds = associatedEndpoint.getSortedCacheServers();
+                for (int i : cacheServerIds) {
+                    CacheServer server = cacheServers[i];
+                    server.si
+                }
+                
+            }
         }
     }
 }
