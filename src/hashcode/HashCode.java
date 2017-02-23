@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 /**
  *
@@ -43,14 +44,14 @@ public class HashCode {
         int[] videos = new int[numberOfVideos];
         Endpoint[] endpoints = new Endpoint[numberOfEndpoints];
         RequestDescription[] requests = new RequestDescription[numberOfRequestDescriptions];
-        
+
         // videos line
         String[] videosDescription = inputFile.nextLine().split(" ");
-        
+
         for (int i = 0; i < numberOfVideos; i++) {
             videos[i] = Integer.parseInt(videosDescription[i]);
         }
-        
+
         for (int i = 0; i < numberOfEndpoints; i++) {
             String[] endpointDescription = inputFile.nextLine().split(" ");
             int latency = Integer.parseInt(endpointDescription[0]);
@@ -61,17 +62,17 @@ public class HashCode {
                 String[] thisEndpointDescription = inputFile.nextLine().split(" ");
 
                 endpoint.addCacheServer(
-                        Integer.parseInt(thisEndpointDescription[0]), 
+                        Integer.parseInt(thisEndpointDescription[0]),
                         Integer.parseInt(thisEndpointDescription[1]));
             }
             endpoints[i] = endpoint;
         }
-        
+
         for (int i = 0; i < numberOfRequestDescriptions; i++) {
-            String[] requestDescription = inputFile.nextLine().split(" ");
-            int videoId = Integer.parseInt(requestDescription[0]);
-            int endpointId = Integer.parseInt(requestDescription[1]);
-            int numOfRequests = Integer.parseInt(requestDescription[2]);
+            int[] requestDescription = getIntegerArray(inputFile.nextLine());
+            int videoId = requestDescription[0];
+            int endpointId = requestDescription[1];
+            int numOfRequests = requestDescription[2];
             requests[i] = new RequestDescription(numOfRequests, videoId, endpointId);
         }
 
@@ -83,7 +84,8 @@ public class HashCode {
 
     }
 
-    private static void getIntegerArray(String line) {
-        
+    private static int[] getIntegerArray(String line) {
+        int[] v = Stream.of(line.split(" ")).mapToInt(Integer::parseInt).toArray();
+        return v;
     }
 }
