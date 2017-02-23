@@ -6,6 +6,7 @@
 package hashcode;
 
 import hashcode.Models.Endpoint;
+import hashcode.Models.RequestDescription;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
