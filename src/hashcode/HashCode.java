@@ -7,6 +7,7 @@ package hashcode;
 
 import hashcode.Models.Endpoint;
 import hashcode.Models.RequestDescription;
+import hashcode.Models.Video;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -33,14 +34,13 @@ public class HashCode {
         Scanner inputFile = new Scanner(file);
 
         // description line
-        String s = inputFile.nextLine();
-        String[] description = s.split(" ");
-        numberOfVideos = Integer.parseInt(description[0]);
-        numberOfEndpoints = Integer.parseInt(description[1]);
-        numberOfRequestDescriptions = Integer.parseInt(description[2]);
-        numberOfCacheServers = Integer.parseInt(description[3]);
-        cacheServerSize = Integer.parseInt(description[4]);
-        int[] videos = new int[numberOfVideos];
+        int[] description = getIntegerArray(inputFile.nextLine());
+        numberOfVideos = description[0];
+        numberOfEndpoints = description[1];
+        numberOfRequestDescriptions = description[2];
+        numberOfCacheServers = description[3];
+        cacheServerSize = description[4];
+        Video[] videos = new Video[numberOfVideos];
         Endpoint[] endpoints = new Endpoint[numberOfEndpoints];
         RequestDescription[] requests = new RequestDescription[numberOfRequestDescriptions];
 
@@ -48,9 +48,10 @@ public class HashCode {
         String[] videosDescription = inputFile.nextLine().split(" ");
 
         for (int i = 0; i < numberOfVideos; i++) {
-            videos[i] = Integer.parseInt(videosDescription[i]);
+            videos[i] = new Video(Integer.parseInt(videosDescription[i]));
         }
 
+        // endpoints
         for (int i = 0; i < numberOfEndpoints; i++) {
             int[] endpointDescription = getIntegerArray(inputFile.nextLine());
             int latency = endpointDescription[0];
@@ -67,6 +68,7 @@ public class HashCode {
             endpoints[i] = endpoint;
         }
 
+        // request descriptions
         for (int i = 0; i < numberOfRequestDescriptions; i++) {
             int[] requestDescription = getIntegerArray(inputFile.nextLine());
             int videoId = requestDescription[0];
