@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hashcode.Models;
 
 import java.util.ArrayList;
@@ -20,15 +15,13 @@ public class CacheServer {
     private int freeSpace;
     private int id;
 
- 
-    public int getId() {
-        return id;
-    }
-
-
     public CacheServer(int id) {
         freeSpace = cacheServerSize;
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void addVideoById(int id, int spaceUsed) {
@@ -43,10 +36,9 @@ public class CacheServer {
     public List<Integer> getVideos() {
         return videoIds;
     }
-    
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "id:" + id + " StoredVideos: " + Arrays.toString(videoIds.toArray()) + " spaceTaken: " + (cacheServerSize - freeSpace) + "/" + cacheServerSize;
     }
 

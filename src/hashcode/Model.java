@@ -80,15 +80,12 @@ public class Model
         });
     }
 
-    public void cacheVideos()
-    {
-        mark:
-        for (RequestDescription request : requests)
-        {
+
+    public void cacheVideos() {
+        for (RequestDescription request : requests) {
             Endpoint associatedEndpoint = endpoints[request.getEndpointId()];
             Video associatedVideo = videos[request.getVideoId()];
-            if (!associatedEndpoint.hasAnyCacheServers())
-            {
+            if (!associatedEndpoint.hasAnyCacheServers() || associatedVideo.getSize() > cacheServerSize) {
                 continue;
             }
 
@@ -96,15 +93,13 @@ public class Model
             for (int i : cacheServerIds)
             {
                 CacheServer server = cacheServers[i];
-                if (associatedVideo.getSize() > server.getFreeSpace())
-                {
-                    //
+                if (associatedVideo.getSize() > server.getFreeSpace()) {
                     continue;
                 }
 
                 if (!server.containsVideoId(request.getVideoId()))
                     server.addVideoById(request.getVideoId(), associatedVideo.getSize());
-                continue mark;
+                continue;
             }
         }
 
@@ -125,7 +120,6 @@ public class Model
             }
             writer.close();
         } catch (IOException e) {
-            // do something
         }
     }
 

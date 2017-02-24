@@ -1,6 +1,5 @@
 package hashcode.Models;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Endpoint {
@@ -9,7 +8,7 @@ public class Endpoint {
     private Map<Integer, Integer> map;
     private int latencyToDataCenter;
     private int endpointId;
-    ArrayList<Integer> sortedServers = null;
+    List<Integer> sortedServers = null;
 
     public Endpoint(int id, int latencyToDataCenter) {
         endpointId = id;
@@ -34,7 +33,7 @@ public class Endpoint {
         return "id: " + endpointId + " latencyToDataCenter: " + latencyToDataCenter + " latencyToDataCacheServers: " + map;
     }
 
-    public ArrayList<Integer> getSortedCacheServers() {
+    public List<Integer> getSortedCacheServers() {
         if (sortedServers != null) {
             return sortedServers;
         }
