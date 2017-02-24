@@ -52,8 +52,7 @@ public class Model {
     }
 
     public void sortRequests() {
-        Arrays.sort(requests, (o1, o2)
-                -> {
+        Arrays.sort(requests, (o1, o2) -> {
             float weight1 = (float) (endpoints[o1.getEndpointId()].getLatencyToDataCenter() * o1.getNumberOfRequests()) / videos[o1.getVideoId()].getSize();
             float weight2 = (float) (endpoints[o2.getEndpointId()].getLatencyToDataCenter() * o2.getNumberOfRequests()) / videos[o2.getVideoId()].getSize();
 
@@ -87,7 +86,7 @@ public class Model {
                     continue;
                 }
                 server.addVideoById(request.getVideoId(), associatedVideo.getSize());
-                continue mark;
+                break;
             }
         }
     }

@@ -27,7 +27,7 @@ public class HashCode {
         int numberOfVideos, numberOfEndpoints, numberOfRequestDescriptions, numberOfCacheServers, cacheServerSize;
 
         //System.out.print("Enter the filename: ");
-        String filename = "vr.in";//keyboard.nextLine();
+        String filename = "in.txt";//keyboard.nextLine();
 
         File file = new File(filename);
         Scanner inputFile = new Scanner(file);
