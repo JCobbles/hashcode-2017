@@ -86,10 +86,10 @@ public class HashCode
         }
 
         model = new Model(numberOfCacheServers, cacheServerSize, videos, endpoints, requests);
-        model.display();
+//        model.display();
 
         model.sortRequests();
-        model.displayRequests();
+//        model.displayRequests();
 
         model.cacheVideos();
         model.displayCache();

@@ -18,13 +18,13 @@ public class CacheServer {
 
     private List<Integer> videoIds = new ArrayList<>();
     private int freeSpace;
+    private int id;
 
-    public int getId()
-    {
+ 
+    public int getId() {
         return id;
     }
 
-    private int id;
 
     public CacheServer(int id) {
         freeSpace = cacheServerSize;
@@ -40,6 +40,10 @@ public class CacheServer {
         return freeSpace;
     }
 
+    public List<Integer> getVideos() {
+        return videoIds;
+    }
+    
     @Override
     public String toString()
     {
