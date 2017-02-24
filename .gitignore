@@ -3,6 +3,7 @@ test
 build.xml
 manifest.mf
 out
+.idea/
 .idea
 *.iml
 /build/
