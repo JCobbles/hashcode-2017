@@ -87,7 +87,7 @@ public class HashCode
 //        model.displayRequests();
 
         model.cacheVideos();
-        model.displayCache();
+//        model.displayCache();
 
         model.writeOutput(filename);
     }

@@ -6,9 +6,6 @@ import java.util.List;
 
 import static hashcode.Model.cacheServerSize;
 
-/**
- * @author jacob
- */
 public class CacheServer {
 
     private List<Integer> videoIds = new ArrayList<>();
@@ -37,11 +34,6 @@ public class CacheServer {
         return videoIds;
     }
 
-    @Override
-    public String toString() {
-        return "id:" + id + " StoredVideos: " + Arrays.toString(videoIds.toArray()) + " spaceTaken: " + (cacheServerSize - freeSpace) + "/" + cacheServerSize;
-    }
-
     public boolean containsVideoId(int videoId)
     {
         return videoIds.contains(videoId);
@@ -55,5 +47,10 @@ public class CacheServer {
     public List<Integer> getVideoIds()
     {
         return videoIds;
+    }
+    
+    @Override
+    public String toString() {
+        return "id:" + id + " StoredVideos: " + Arrays.toString(videoIds.toArray()) + " spaceTaken: " + (cacheServerSize - freeSpace) + "/" + cacheServerSize;
     }
 }
