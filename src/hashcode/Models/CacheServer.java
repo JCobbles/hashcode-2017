@@ -45,4 +45,19 @@ public class CacheServer {
     {
         return "id:" + id + " StoredVideos: " + Arrays.toString(videoIds.toArray()) + " spaceTaken: " + (cacheServerSize - freeSpace) + "/" + cacheServerSize;
     }
+
+    public boolean containsVideoId(int videoId)
+    {
+        return videoIds.contains(videoId);
+    }
+
+    public boolean isEmpty()
+    {
+        return videoIds.isEmpty();
+    }
+
+    public List<Integer> getVideoIds()
+    {
+        return videoIds;
+    }
 }

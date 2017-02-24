@@ -5,13 +5,17 @@ import hashcode.Models.Endpoint;
 import hashcode.Models.RequestDescription;
 import hashcode.Models.Video;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Model {
+public class Model
+{
 
     private int numberOfCacheServers;
     public static int cacheServerSize;
@@ -21,7 +25,8 @@ public class Model {
 
     private CacheServer[] cacheServers;
 
-    public Model(int numberOfCacheServers, int cacheServerSize, Video[] videos, Endpoint[] endpoints, RequestDescription[] requests) {
+    public Model(int numberOfCacheServers, int cacheServerSize, Video[] videos, Endpoint[] endpoints, RequestDescription[] requests)
+    {
         this.numberOfCacheServers = numberOfCacheServers;
         this.cacheServerSize = cacheServerSize;
         this.videos = videos;
@@ -29,12 +34,14 @@ public class Model {
         this.requests = requests;
 
         cacheServers = new CacheServer[numberOfCacheServers];
-        for (int i = 0; i < numberOfCacheServers; i++) {
+        for (int i = 0; i < numberOfCacheServers; i++)
+        {
             cacheServers[i] = new CacheServer(i);
         }
     }
 
-    public void display() {
+    public void display()
+    {
         System.out.println("numberOfCacheServers: " + numberOfCacheServers);
         System.out.println("cacheServerSize: " + cacheServerSize + "MB");
         System.out.println("videos.length: " + videos.length);
@@ -44,22 +51,26 @@ public class Model {
         displayRequests();
     }
 
-    public void displayRequests() {
+    public void displayRequests()
+    {
         System.out.println("requests.length: " + requests.length);
         System.out.println(Arrays.toString(requests));
     }
 
-    public void sortRequests() {
-        Arrays.sort(requests, (o1, o2)
-                -> {
-            float weight1 = (float) (endpoints[o1.getEndpointId()].getLatencyToDataCenter() * o1.getNumberOfRequests()) / videos[o1.getVideoId()].getSize();
-            float weight2 = (float) (endpoints[o2.getEndpointId()].getLatencyToDataCenter() * o2.getNumberOfRequests()) / videos[o2.getVideoId()].getSize();
+    public void sortRequests()
+    {
+        Arrays.sort(requests, (o1, o2) ->
+        {
+            float weight1 = (float) (endpoints[o1.getEndpointId()].getLatencyToDataCenter() * o1.getNumberOfRequests()) /*/ videos[o1.getVideoId()].getSize()*/;
+            float weight2 = (float) (endpoints[o2.getEndpointId()].getLatencyToDataCenter() * o2.getNumberOfRequests()) /*/ videos[o2.getVideoId()].getSize()*/;
 
-            if (weight1 == weight2) {
+            if (weight1 == weight2)
+            {
                 return 0;
             }
 
-            if (weight1 > weight2) {
+            if (weight1 > weight2)
+            {
                 return -1;
             }
 
@@ -67,34 +78,72 @@ public class Model {
         });
     }
 
-    public void cacheVideos() {
-
+    public void cacheVideos()
+    {
         mark:
-        for (RequestDescription request : requests) {
+        for (RequestDescription request : requests)
+        {
             Endpoint associatedEndpoint = endpoints[request.getEndpointId()];
             Video associatedVideo = videos[request.getVideoId()];
-            if (!associatedEndpoint.hasAnyCacheServers()) {
+            if (!associatedEndpoint.hasAnyCacheServers())
+            {
                 continue;
             }
 
             List<Integer> cacheServerIds = associatedEndpoint.getSortedCacheServers();
-            for (int i : cacheServerIds) {
+            for (int i : cacheServerIds)
+            {
                 CacheServer server = cacheServers[i];
-                if (associatedVideo.getSize() > server.getFreeSpace()) {
+                if (associatedVideo.getSize() > server.getFreeSpace())
+                {
                     //
                     continue;
                 }
-                server.addVideoById(request.getVideoId(), associatedVideo.getSize());
+                if (!server.containsVideoId(request.getVideoId()))
+                    server.addVideoById(request.getVideoId(), associatedVideo.getSize());
                 continue mark;
             }
         }
+
+
     }
 
     public void displayCache()
     {
-        for(CacheServer cacheServer: cacheServers)
+        for (CacheServer cacheServer : cacheServers)
         {
             System.out.println(cacheServer);
         }
+    }
+
+    public void writeOutput(String filename)
+    {
+        ArrayList<CacheServer> usedServers = new ArrayList<>();
+        for (CacheServer server : cacheServers)
+        {
+            if (!server.isEmpty())
+                usedServers.add(server);
+        }
+
+        PrintWriter printWriter = null;
+        try
+        {
+            printWriter = new PrintWriter(filename + ".out");
+        }
+        catch (FileNotFoundException e)
+        {
+        }
+
+        printWriter.println(usedServers.size());
+        for (CacheServer cacheServer : cacheServers)
+        {
+            printWriter.print(cacheServer.getId() + " ");
+            for (int vidId : cacheServer.getVideoIds())
+            {
+                printWriter.print(vidId + " ");
+            }
+            printWriter.println();
+        }
+        printWriter.close();
     }
 }
